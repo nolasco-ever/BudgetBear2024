@@ -53,16 +53,6 @@ export const Button = ({
         }}>
         {label}
       </Text>
-      {/* <TextInput
-        value={value}
-        editable={isEditable}
-        onChangeText={setValue}
-        multiline={multiline}
-        scrollEnabled={multiline}
-        onFocus={() => setBorderColor('#0096FF')}
-        onBlur={() => setBorderColor('rgba(0,0,0,0)')}
-        style={{height: '100%', fontSize: 16}}
-      /> */}
     </TouchableOpacity>
   );
 };

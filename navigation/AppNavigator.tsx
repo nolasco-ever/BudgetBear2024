@@ -7,7 +7,9 @@ const Tab = createBottomTabNavigator();
 export const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="HomeTab">
+      <Tab.Navigator
+        initialRouteName="HomeTab"
+        screenOptions={{headerShown: false}}>
         <Tab.Screen name="HomeTab" component={HomeStack} />
       </Tab.Navigator>
     </NavigationContainer>
