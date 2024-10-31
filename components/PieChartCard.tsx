@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Card} from './Card';
 import {PieChart} from './PieChart';
+import {Icon} from './Icon';
 
 type PieData = {
   text: string;
@@ -25,7 +26,8 @@ export const Legend: React.FC<LegendProps> = ({data}) => {
 
         return (
           <View key={index} style={styles.item}>
-            <Text style={[styles.text, {color: item.color}]}>
+            <Icon name="circle" size={18} color={item.color} />
+            <Text style={styles.text}>
               {item.text} - {percentage}%
             </Text>
           </View>
@@ -62,10 +64,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   item: {
-    marginVertical: 5,
+    flexDirection: 'row',
+    marginBottom: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
+    marginLeft: 10,
   },
 });

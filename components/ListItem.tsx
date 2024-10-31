@@ -8,11 +8,14 @@ import {
 import React from 'react';
 import {Divider} from './Divider';
 import {useListGroupContext} from '../helpers/ListGroupContext';
+import {Icon} from './Icon';
 
 interface ListItemProps {
   leftLabel: string;
   description?: string;
   rightLabel?: string;
+  leftIcon?: string;
+  rightIcon?: string;
   onPress?: () => void;
   divider?: boolean;
 }
@@ -21,6 +24,8 @@ export const ListItem = ({
   leftLabel,
   description,
   rightLabel,
+  leftIcon,
+  rightIcon,
   onPress,
   divider = false,
 }: ListItemProps) => {
@@ -46,6 +51,7 @@ export const ListItem = ({
           inListGroup ? listGroupItemStyle : floatStyle,
         ]}>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          {leftIcon ? <Icon name={leftIcon} /> : null}
           <View style={{marginLeft: 10}}>
             <Text style={[styles.body1Text, {color: '#000'}]}>{leftLabel}</Text>
             {description ? (
@@ -62,6 +68,7 @@ export const ListItem = ({
             </Text>
           </View>
         ) : null}
+        {rightIcon ? <Icon name={rightIcon} size={18} color="grey" /> : null}
       </TouchableOpacity>
       {divider ? <Divider /> : null}
     </>

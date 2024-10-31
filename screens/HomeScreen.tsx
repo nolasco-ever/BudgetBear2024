@@ -25,7 +25,7 @@ export const HomeScreen = () => {
           label: 'BudgetBear',
         },
         rightConfig: {
-          icon: '+',
+          icon: 'plus',
           onPress: () => console.log('Plus pressed'),
         },
       }),
@@ -72,7 +72,7 @@ export const HomeScreen = () => {
                 key={index}
                 leftLabel={data.text}
                 description={`$${data.value}`}
-                rightLabel=">"
+                rightIcon="chevronRight"
                 divider
               />
             ))}

@@ -1,5 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
+import {icons} from '../icons/iconLibrary';
+import {Icon} from '../components/Icon';
 
 interface LabelConfig {
   label: string;
@@ -7,7 +9,7 @@ interface LabelConfig {
 }
 
 interface IconConfig {
-  icon: string;
+  icon: keyof typeof icons;
   onPress?: () => void;
 }
 
@@ -44,11 +46,11 @@ export const buildHeader = ({
       const {icon, onPress} = config;
       return onPress ? (
         <TouchableOpacity onPress={onPress} style={{padding: 10}}>
-          <Text>{icon}</Text>
+          <Icon name={icon} />
         </TouchableOpacity>
       ) : (
         <View style={{padding: 10}}>
-          <Text>{icon}</Text>
+          <Icon name={icon} />
         </View>
       );
     }
