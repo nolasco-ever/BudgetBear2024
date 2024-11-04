@@ -1,32 +1,30 @@
 import {useNavigation} from '@react-navigation/native';
 import {useLayoutEffect} from 'react';
-import {SafeAreaView, ScrollView, Text} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 import {buildHeader} from '../helpers/buildHeader';
 import {Carousel} from '../components/Carousel';
-import {Card} from '../components/Card';
 import {BudgetOverviewCard} from '../components/BudgetOverviewCard';
 import {PieChartCard} from '../components/PieChartCard';
-import {PieChart} from '../components/PieChart';
 import {Section} from '../components/Section';
 import {ListItem} from '../components/ListItem';
 import {ListGroup} from '../components/ListGroup';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {HomeStackParams} from '../navigation/stacks/HomeStack';
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  HomeStackParams,
+  'HomeScreen'
+>;
 
 export const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   useLayoutEffect(() => {
     navigation.setOptions(
       buildHeader({
-        leftConfig: {
+        centerConfig: {
           label: 'November',
           onPress: () => console.log('Title Pressed'),
-        },
-        centerConfig: {
-          label: 'BudgetBear',
-        },
-        rightConfig: {
-          icon: 'plus',
-          onPress: () => console.log('Plus pressed'),
         },
       }),
     );
@@ -74,6 +72,11 @@ export const HomeScreen = () => {
                 description={`$${data.value}`}
                 rightIcon="chevronRight"
                 divider
+                onPress={() =>
+                  navigation.navigate('CategoryScreen', {
+                    categoryName: data.text,
+                  })
+                }
               />
             ))}
           </ListGroup>

@@ -50,25 +50,21 @@ export const ListItem = ({
           },
           inListGroup ? listGroupItemStyle : floatStyle,
         ]}>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={styles.leftContentContainer}>
           {leftIcon ? <Icon name={leftIcon} /> : null}
-          <View style={{marginLeft: 10}}>
-            <Text style={[styles.body1Text, {color: '#000'}]}>{leftLabel}</Text>
+          <View style={styles.leftLabelContainer}>
+            <Text style={styles.leftLabelText}>{leftLabel}</Text>
             {description ? (
-              <Text style={[styles.captionText, {color: 'grey'}]}>
-                {description}
-              </Text>
+              <Text style={styles.descriptionText}>{description}</Text>
             ) : null}
           </View>
         </View>
-        {rightLabel ? (
-          <View>
-            <Text style={[styles.body2Text, {color: '#000'}]}>
-              {rightLabel}
-            </Text>
-          </View>
-        ) : null}
-        {rightIcon ? <Icon name={rightIcon} size={18} color="grey" /> : null}
+        <View style={styles.rightContentContainer}>
+          {rightLabel ? (
+            <Text style={styles.rightLabelText}>{rightLabel}</Text>
+          ) : null}
+          {rightIcon ? <Icon name={rightIcon} size={18} color="grey" /> : null}
+        </View>
       </TouchableOpacity>
       {divider ? <Divider /> : null}
     </>
@@ -85,16 +81,28 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
   },
-
-  // text styles
-  body1Text: {
+  leftContentContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  leftLabelContainer: {
+    marginLeft: 10,
+  },
+  leftLabelText: {
     fontSize: 16,
     fontWeight: '500',
+    color: '#000',
   },
-  body2Text: {
-    fontSize: 16,
-  },
-  captionText: {
+  descriptionText: {
     fontSize: 14,
+    color: 'grey',
+  },
+  rightContentContainer: {
+    flexDirection: 'row',
+  },
+  rightLabelText: {
+    fontSize: 16,
+    color: '#000',
+    marginRight: 10,
   },
 });

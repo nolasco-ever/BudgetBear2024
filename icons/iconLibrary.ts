@@ -19,6 +19,7 @@ import {
   faPlus,
   faCheck,
   faCamera,
+  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const icons: Record<string, IconProp> = {
@@ -37,6 +38,7 @@ export const icons: Record<string, IconProp> = {
   circle: faCircle,
   chevronLeft: faChevronLeft,
   chevronRight: faChevronRight,
+  chevronDown: faChevronDown,
   penToSquare: faPenToSquare,
   plus: faPlus,
   check: faCheck,

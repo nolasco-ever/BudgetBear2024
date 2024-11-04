@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Card} from './Card';
 import {Divider} from './Divider';
 import {ProgressBar} from './ProgressBar';
+import {Stat} from './Stat';
 
 interface BudgetOverviewCardProps {
   totalIncome: number;
@@ -23,50 +24,13 @@ export const BudgetOverviewCard = ({
       <View style={styles.summaryContainer}>
         <Stat amount={remainingBudget} title="Remaining" />
         <View style={styles.statGroupContainer}>
-          <Stat
-            amount={totalIncome}
-            title="Money In"
-            type="secondary"
-            color="green"
-          />
+          <Stat amount={totalIncome} title="Money In" size="sm" color="green" />
           <Divider orientation="vertical" opacity={0.5} />
-          <Stat
-            amount={totalSpent}
-            title="Spent"
-            type="secondary"
-            color="red"
-          />
+          <Stat amount={totalSpent} title="Spent" size="sm" color="red" />
         </View>
         <ProgressBar percent={budgetUsedPercentage} />
       </View>
     </Card>
-  );
-};
-
-interface StatProps {
-  amount: number;
-  title: string;
-  type?: 'primary' | 'secondary';
-  color?: string;
-}
-
-const Stat = ({amount, title, type = 'primary', color = '#000'}: StatProps) => {
-  return (
-    <View style={styles.statContainer}>
-      <Text
-        style={[
-          type === 'primary' ? styles.headerText : styles.subheaderText,
-          {color: color},
-        ]}>{`$${amount.toFixed(2)}`}</Text>
-      <Text
-        style={
-          type === 'primary'
-            ? styles.captionLargeBoldText
-            : styles.captionBoldText
-        }>
-        {title}
-      </Text>
-    </View>
   );
 };
 
@@ -88,33 +52,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#76c7c0',
     borderRadius: 5,
   },
-  statContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   statGroupContainer: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     padding: 10,
-  },
-  headerText: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  subheaderText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  captionBoldText: {
-    fontSize: 14,
-    color: 'grey',
-    fontWeight: 'bold',
-  },
-  captionLargeBoldText: {
-    fontSize: 16,
-    color: 'grey',
-    fontWeight: 'bold',
   },
 });

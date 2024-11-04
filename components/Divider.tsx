@@ -3,20 +3,16 @@ import {View, ViewStyle} from 'react-native';
 
 interface DividerProps {
   orientation?: 'horizontal' | 'vertical';
-  /**
-   * Opacity of the divider, must be a value between 0 and 1.0.
-   */
   opacity?: number;
-  /**
-   * Percent length of the divider, must be a value of 0 - 100
-   */
   length?: number;
+  padding?: number;
 }
 
 export const Divider = ({
   orientation = 'horizontal',
   opacity = 0.05,
   length = 100,
+  padding = 0,
 }: DividerProps) => {
   if (opacity < 0 || opacity > 1) {
     throw new Error('Opacity cannot be less than 0 or greater than 1.');
@@ -29,8 +25,18 @@ export const Divider = ({
   const dividerStyle: ViewStyle = {
     backgroundColor: `rgba(0,0,0,${opacity})`,
     ...(orientation === 'horizontal'
-      ? {height: 1, width: `${length}%`}
-      : {width: 1, height: `${length}%`}),
+      ? {
+          height: 1,
+          width: `${length}%`,
+          marginTop: padding,
+          marginBottom: padding,
+        }
+      : {
+          width: 1,
+          height: `${length}%`,
+          marginLeft: padding,
+          marginRight: padding,
+        }),
   };
 
   return <View style={dividerStyle} />;

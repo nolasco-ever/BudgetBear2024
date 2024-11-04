@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 import {icons} from '../icons/iconLibrary';
 import {Icon} from '../components/Icon';
 
@@ -13,7 +13,6 @@ interface IconConfig {
   onPress?: () => void;
 }
 
-// Union type that allows only one of the two configurations
 type Config = LabelConfig | IconConfig;
 
 interface BuildHeaderOptions {
@@ -30,26 +29,28 @@ export const buildHeader = ({
   const renderItem = (config?: Config) => {
     if (!config) return null;
 
-    // Destructure based on type
     if ('label' in config) {
       const {label, onPress} = config;
       return onPress ? (
-        <TouchableOpacity onPress={onPress} style={{padding: 10}}>
-          <Text>{label}</Text>
+        <TouchableOpacity
+          onPress={onPress}
+          style={styles.tappableTextContainer}>
+          <Text style={styles.tappableText}>{label}</Text>
+          <Icon name="chevronDown" size={14} color="#115293" />
         </TouchableOpacity>
       ) : (
-        <View style={{padding: 10}}>
-          <Text>{label}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.staticText}>{label}</Text>
         </View>
       );
     } else if ('icon' in config) {
       const {icon, onPress} = config;
       return onPress ? (
-        <TouchableOpacity onPress={onPress} style={{padding: 10}}>
+        <TouchableOpacity onPress={onPress} style={styles.iconContainer}>
           <Icon name={icon} />
         </TouchableOpacity>
       ) : (
-        <View style={{padding: 10}}>
+        <View style={styles.iconContainer}>
           <Icon name={icon} />
         </View>
       );
@@ -60,17 +61,47 @@ export const buildHeader = ({
 
   return {
     headerTitle: () => (
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flex: 1,
-        }}>
+      <View style={styles.headerTitleContainer}>
         {renderItem(centerConfig)}
       </View>
     ),
-    headerLeft: () => renderItem(leftConfig),
-    headerRight: () => renderItem(rightConfig),
+    headerLeft: () => (
+      <View style={{marginLeft: 10}}>{renderItem(leftConfig)}</View>
+    ),
+    headerRight: () => (
+      <View style={{marginRight: 10}}>{renderItem(rightConfig)}</View>
+    ),
   };
 };
+
+const styles = StyleSheet.create({
+  headerTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  textContainer: {
+    padding: 10,
+  },
+  staticText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  tappableTextContainer: {
+    flexDirection: 'row',
+    padding: 5,
+    borderColor: '#115293',
+    borderWidth: 2,
+    borderRadius: 5,
+  },
+  tappableText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginRight: 5,
+    color: '#115293',
+  },
+  iconContainer: {
+    padding: 10,
+  },
+});
